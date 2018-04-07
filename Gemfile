@@ -1,3 +1,5 @@
+ruby '2.5.0'
+
 source 'https://rubygems.org'
 
 git_source(:github) do |repo_name|
@@ -35,32 +37,13 @@ gem 'devise'
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 
-# Upload images to Amazon S3
-gem 'aws-sdk'
-# Required for validations
-gem 'fastimage'
-# Required for image versioning
-gem 'image_processing'
-# Required for image versioning
-gem 'mini_magick'
-# Shrine :)
-gem 'shrine'
-
-# ENV variables/secrets
-gem 'figaro'
-
-# Bootstrap
-gem 'bootstrap', '~> 4.0.0.beta'
-gem 'jquery-rails'
-
-
-source 'https://rails-assets.org' do
-  gem 'rails-assets-dropzone'
-end
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
+  gem 'rspec-rails'
+  gem 'capybara'
+  gem 'selenium-webdriver'
 end
 
 group :development do
@@ -72,9 +55,28 @@ group :development do
   gem 'spring-watcher-listen', '~> 2.0.0'
 end
 
-group :test do
-  gem 'rspec-rails'
-  gem 'capybara'
-end
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
+
+# ENV variables/secrets
+gem 'figaro'
+
+# Bootstrap
+gem 'bootstrap', '~> 4.0.0.beta'
+gem 'jquery-rails'
+
+# Upload images to Amazon S3
+gem 'aws-sdk'
+# Required for validations
+gem 'fastimage'
+# Required for image versioning
+gem 'image_processing'
+# Required for image versioning
+gem 'mini_magick'
+# Shrine :)
+gem 'shrine'
+
+# Assets
+source 'https://rails-assets.org' do
+  gem 'rails-assets-dropzone'
+end

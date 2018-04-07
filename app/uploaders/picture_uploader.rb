@@ -49,7 +49,6 @@ class PictureUploader < Shrine
   # Process additional versions in background.
   process(:store) do |io|
     original = io[:original].download
-
     {
       # Original
       sm: resize_to_fit(original, 350, 350),
