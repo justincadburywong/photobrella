@@ -37,12 +37,22 @@ gem 'devise'
 
 # Upload images to Amazon S3
 gem 'aws-sdk'
+# Required for validations
+gem 'fastimage'
 # Required for image versioning
 gem 'image_processing'
 # Required for image versioning
 gem 'mini_magick'
 # Shrine :)
 gem 'shrine'
+
+# ENV variables/secrets
+gem 'figaro'
+
+# Bootstrap
+gem 'bootstrap', '~> 4.0.0.beta'
+gem 'jquery-rails'
+
 
 source 'https://rails-assets.org' do
   gem 'rails-assets-dropzone'
