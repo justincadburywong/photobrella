@@ -36,29 +36,28 @@ class PictureUploader < Shrine
     validate_mime_type_inclusion ['image/jpeg', 'image/png', 'image/gif']
   end
 
-
   # Access :original and :thumbnail versions immediately.
   # Recaching will be automatically triggered in a callback.
   process(:recache) do |io|
     {
       original: io,
-      thumbnail: resize_to_fill!(io.download, 600, 600)
+      thumbnail: resize_to_fill!(io.download, 600, 0)
     }
   end
 
-  # Process additional versions in background.
+  # Process additonal versions in background.
   process(:store) do |io|
     original = io[:original].download
     {
       # Original
-      sm: resize_to_fit(original, 350, 350),
-      md: resize_to_fit(original, 600, 600),
-      lg: resize_to_fit(original, 1200, 1200),
+      sm: resize_to_fit(original, 350, 0),
+      md: resize_to_fit(original, 600, 0),
+      lg: resize_to_fit(original, 1200, 0),
 
       # Squares
-      sm_square: resize_to_fill(original, 350, 350),
-      md_square: resize_to_fill(original, 600, 600),
-      lg_square: resize_to_fill(original, 1200, 1200),
+      sm_square: resize_to_fill(original, 350, 0),
+      md_square: resize_to_fill(original, 600, 0),
+      lg_square: resize_to_fill(original, 1200, 0),
     }
   end
 end

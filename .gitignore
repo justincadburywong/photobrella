@@ -19,7 +19,5 @@
 .byebug_history
 Gemfile.lock
 
-.env
-
 # Ignore application configuration
 /config/application.yml

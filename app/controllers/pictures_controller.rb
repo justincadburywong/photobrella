@@ -21,6 +21,7 @@ class PicturesController < ApplicationController
 
       render json: { picture: picture_partial }, status: 200
     else
+      p @picture
       render json: @picture.errors, status: 400
     end
   end

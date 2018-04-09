@@ -17,6 +17,8 @@ ActiveRecord::Schema.define(version: 20180407010804) do
 
   create_table "pictures", force: :cascade do |t|
     t.string "file_data"
+    t.string "tags", array: true
+    t.integer "user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
