@@ -39,5 +39,5 @@ Shrine.plugin :backgrounding
 # Setup background jobs (sidekiq workers) for async uploads.
 # app/jobs/shrine_backgrounding/promote_job.rb
 Shrine::Attacher.promote { |data| ShrineBackgrounding::PromoteJob.perform_async(data) }
-# app/jobs/shrine_backgrounding/delete_job.rb
+# app/jobs/shrine_ba6ckgrounding/delete_job.rb
 Shrine::Attacher.delete { |data| ShrineBackgrounding::DeleteJob.perform_async(data) }
