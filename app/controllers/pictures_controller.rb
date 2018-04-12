@@ -2,6 +2,7 @@ class PicturesController < ApplicationController
   before_action :authenticate_user!
   def index
     @pictures = User.find(current_user.id).pictures.sorted
+    # additional 'into groups of 4 logic here'
   end
 
   def create
@@ -23,4 +24,5 @@ class PicturesController < ApplicationController
       render json: @picture.errors, status: 400
     end
   end
+
 end
