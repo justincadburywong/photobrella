@@ -23,5 +23,4 @@ class PicturesController < ApplicationController
       render json: @picture.errors, status: 400
     end
   end
-
 end
