@@ -1,3 +1,4 @@
-<%= content_tag :div, id: dom_id(picture), class: 'column col-3 lazyload'  do %>
-  <%= link_to image_tag(picture.file_url(:thumbnail), class: 'rounded img-fluid mb-3'), picture.file_url(:original) %>
+<%= content_tag :div, id: dom_id(picture), class: 'column col-3'  do %>
+  <%= link_to image_tag(image_path("ajax-loader.gif"), data: { "src" => image_path(picture.file_url(:thumbnail)), "lazy" => image_path(picture.file_url(:thumbnail)) }, class: 'rounded img-fluid mb-3 lazyload'), picture.file_url(:original) %>
+  <div class="tags" style="display:none;" id="<%=picture.tags%>"></div>
 <% end %>
