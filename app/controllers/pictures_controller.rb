@@ -1,13 +1,12 @@
 class PicturesController < ApplicationController
-  # skip_before_action :verify_authenticity_token, only: [:create]
-
+  before_action :authenticate_user!
   def index
-    @pictures = Picture.sorted
+    @pictures = User.find(current_user.id).pictures.sorted
   end
 
   def create
     # Dropzone will send each file inside of the `:file` param.
-    @picture = Picture.create(file: params[:file])
+    @picture = Picture.create(file: params[:file], user_id: current_user.id)
 
     # Return a json response of the partial `_picture.html.erb` so Dropzone can append the uploaded image to the dom if the `@picture` object was successfully created.
     if @picture
@@ -21,7 +20,6 @@ class PicturesController < ApplicationController
 
       render json: { picture: picture_partial }, status: 200
     else
-      p @picture
       render json: @picture.errors, status: 400
     end
   end

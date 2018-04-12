@@ -1,4 +1,4 @@
-<h2>Sign up</h2>
+<!-- <h2>Sign up</h2>
 
 <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
   <%= devise_error_messages! %>
@@ -26,4 +26,30 @@
   </div>
 <% end %>
 
-<%= render "users/shared/links" %>
+<%= render "users/shared/links" %> -->
+
+
+
+<div class="text-center">
+  <div class="row">
+
+        <div class="text-align" style="text-align: center!important;">
+
+          <form class="form-signin" method="post" action="/signup">
+            <h1 class="h3 mb-3 font-weight-normal">Please sign up</h1>
+
+            <label for="inputEmail" class="sr-only">Email address</label>
+            <input type="email" name="email" id="inputEmail" class="form-control" placeholder="Email address" required="" autofocus="" >
+
+            <label for="inputPassword" class="sr-only">Password</label>
+            <input type="password" name="password" id="inputPassword" class="form-control" placeholder="Password" required="" >
+
+            <label for="inputPassword" class="sr-only">Confirm Password</label>
+            <input type="password" name="password2" id="inputPassword" class="form-control" placeholder="Confirm Password" required="" >
+
+            <button class="btn btn-lg btn-outline-success btn-block" type="submit">Sign up</button>
+
+          </form>
+        </div>
+
+</div>
