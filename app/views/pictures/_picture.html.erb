@@ -1,4 +1,11 @@
 <%= content_tag :div, id: dom_id(picture), class: 'column col-3'  do %>
-  <%= link_to image_tag(image_path("ajax-loader.gif"), data: { "src" => image_path(picture.file_url(:thumbnail)), "lazy" => image_path(picture.file_url(:thumbnail)) }, class: 'rounded img-fluid mb-3 lazyload'), picture.file_url(:original) %>
-  <div class="tags" style="display:none;" id="<%=picture.tags%>"></div>
+  <%= link_to image_tag(image_path("ajax-loader-lg.gif"), data: { "src" => image_path(picture.file_url(:thumbnail)), "lazy" => image_path(picture.file_url(:thumbnail)) }, class: 'rounded img-fluid mb-3 lazyload'), picture.file_url(:original), target: :_blank %>
+
+  <i class="far fa-edit"></i>
+
+  <form class="tags" action="/pictures/<%=picture.id%>" method="post" style="display:none;">
+    <input class="form-control tag-value" name="tags" value="<%= picture.tags.join(" ") %>">
+    <input class="form-control" type="hidden" name="_method" value="put">
+    <button class="btn btn-lg btn-outline-success btn-block" type="submit">edit tags</button>
+  </form>
 <% end %>
