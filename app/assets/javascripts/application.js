@@ -26,24 +26,71 @@ $(document).ready(function(){
 function eventListeners(){
   slideShow();
   search();
+  showTagForm();
+  editTags();
 }
 
 function search(){
-  $('#search').on('keyup', function(e){
-    console.log(this.value);
+  $('#search').on('input', function(e){
+    var searchTags, tags, filter, tags, i;
+    searchTags = this.value.split(" ");
+    console.log(searchTags);
+    tags = document.getElementByClass('tags');
+    filter = searchTags.value.toLowerCase();
+    // ul = document.getElementById("myUL");
+    // li = ul.getElementsByTagName('li');
+
+    // Loop through all list items, and hide those who don't match the search query
+    for (i = 0; i < tags.length; i++) {
+        selectedTag = tags[i].getElementsByClass(tags)[0];
+        if (a.innerHTML.toUpperCase().indexOf(filter) > -1) {
+            tags[i].style.display = "";
+        } else {
+            tags[i].style.display = "none";
+        }
+    }
   });
+};
+
+// show the edit tag form
+function showTagForm(){
+  $('.fa-edit').on('click', function(e){
+    var edit = $(this).siblings('form');
+    edit.toggle();
+  })
+}
+
+ // submit a tag to an image
+var editTags = function(){
+  $('.tags').on('submit', function(e){
+    e.preventDefault();
+    var tags, postUrl, data;
+    tags = $(this);
+    postUrl = $(this).attr('action');
+    data = $(this).children(':first').serialize();
+    $.ajax({
+    	url: postUrl,
+    	method: 'PUT',
+      data: data
+    }).done(function(data) {
+			tags.toggle();
+			$('.tag-value').empty();
+			$('.tag-value').prepend(data);
+    });
+  })
 };
 
 function slideShow(){
   $('#slideshow').on('click', function(e){
     e.preventDefault();
+    // $(".lazyload").width("100%")
     $('#picture_dropzone').css("display", "none");
     $('#pictures').slick({
       slidesToShow: 80,
-      slidesToScroll: 80,
+      slidesToScroll: 1,
       centerMode: true,
       arrows: false,
-      variableWidth: true,
+      // variableWidth: true,
       // adaptiveHeight: true,
       dots: false,
       infinite: true,
