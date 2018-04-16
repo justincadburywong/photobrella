@@ -29,13 +29,12 @@ class PicturesController < ApplicationController
   def update
     @picture = Picture.find(params[:id])
     @tags = params[:tags].split(" ")
-    if !@picture.tags
-      @picture.tags = []
-    end
+    p @tags
     @tags.each{|t| @picture.tags << t unless @picture.tags.include?(t)}
 
     # if @picture.update_attributes(picture_params)
     if @picture.save
+
       # Reuse existing partial
       picture_partial = render_to_string(
         'pictures/_picture',
@@ -53,6 +52,6 @@ class PicturesController < ApplicationController
   private
 
    def picture_params
-     params.require(:picture).permit(:tags, :file_data, :user_id, :id)
+     params.require(:picture).permit(:tags, :id)
    end
 end
