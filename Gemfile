@@ -65,6 +65,7 @@ gem 'sidekiq'
 # Bootstrap
 gem 'bootstrap', '~> 4.0.0.beta'
 gem 'jquery-rails'
+gem 'font-awesome-sass', '~> 5.0.9'
 
 # Upload images to Amazon S3
 gem 'aws-sdk'
