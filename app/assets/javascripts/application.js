@@ -25,31 +25,56 @@ $(document).ready(function(){
 
 function eventListeners(){
   slideShow();
-  search();
+  filter();
   showTagForm();
   editTags();
 }
 
-function search(){
-  $('#search').on('input', function(e){
-    var searchTags, tags, filter, tags, i;
-    searchTags = this.value.split(" ");
-    console.log(searchTags);
-    tags = document.getElementByClass('tags');
-    filter = searchTags.value.toLowerCase();
-    // ul = document.getElementById("myUL");
-    // li = ul.getElementsByTagName('li');
+function filter(){
+  // $('#filter').on('input', function(e){
+  //   var searchTags, imageTags;
+  //   searchTags = this.value;
+  //   $('.tag-value').each(function(){
+      // console.log(searchTags);
+      // console.log($(this).text());
 
-    // Loop through all list items, and hide those who don't match the search query
-    for (i = 0; i < tags.length; i++) {
-        selectedTag = tags[i].getElementsByClass(tags)[0];
-        if (a.innerHTML.toUpperCase().indexOf(filter) > -1) {
-            tags[i].style.display = "";
-        } else {
-            tags[i].style.display = "none";
-        }
-    }
-  });
+      // if($(this).text().toUpperCase().indexOf(searchTags.toUpperCase()) != -1){
+      //      $(this).hide();
+      //    }
+
+
+       $('#filter').on('input', function () {
+           var filter_array = new Array();
+           var filter = this.value.toLowerCase();  // no need to call jQuery here
+           filter_array = filter.split(' '); // split the user input at the spaces
+           // console.log("words " + filter_array);
+           var arrayLength = filter_array.length; // Get the length of the filter array
+           // console.log("array length " + arrayLength)
+           $('.column').each(function() {
+               /* cache a reference to the current .column (you're using it twice) */
+               var div = $(this);
+               var title = div.find('.tag-value').val().toLowerCase();
+               console.log(title);
+               // title and filter are normalized in lowerCase letters for a case insensitive search
+
+               var hidden = 0; // Set a flag to see if a div was hidden
+
+               // Loop through all the words in the array and hide the div if found
+               for (var i = 0; i < arrayLength; i++) {
+                    if (title.indexOf(filter_array[i]) < 0) {
+                       div.hide();
+                       hidden = 1;
+                   }
+               }
+               // If the flag hasn't been tripped show the div
+               if (hidden == 0)  {
+                  div.show();
+               }
+           });
+        });
+  //
+  //   };
+  // });
 };
 
 // show the edit tag form
@@ -61,7 +86,7 @@ function showTagForm(){
 }
 
  // submit a tag to an image
-var editTags = function(){
+function editTags(){
   $('.tags').on('submit', function(e){
     e.preventDefault();
     var tags, postUrl, data;
