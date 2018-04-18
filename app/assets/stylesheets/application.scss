@@ -18,6 +18,7 @@ body {
   align-items: center;
   -webkit-box-pack: center;
   justify-content: center;
+  padding: 20px;
   padding-top: 50px;
   padding-bottom: 40px;
   background-color: #f5f5f5;
@@ -98,7 +99,7 @@ body {
   }
 }
 
-/* Style the button and place it in the middle of the container/image */
+/* Style the button and place it in the upper left of the container/image */
 .column i {
   position: absolute;
   top: 10%;
