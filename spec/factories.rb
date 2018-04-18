@@ -1,4 +1,4 @@
-FactoryGirl.define do
+FactoryBot.define do
   factory :user do
     email { Faker::Internet.email }
     password "helloworld"
@@ -7,7 +7,8 @@ FactoryGirl.define do
   end
 
   factory :picture do
-    file { Faker::Name.name }
-    user_id { Faker::Hipster.sentence }
+    file_data { Faker::File.file_name('foo\bar', 'baz', 'jpg', '\ ') }
+    user_id { Faker::Number.number(1) }
+    tags { Faker::Types.array }
   end
 end

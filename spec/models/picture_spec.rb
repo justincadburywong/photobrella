@@ -3,54 +3,33 @@ require 'rails_helper'
 RSpec.describe Picture, type: :model do
   describe "Model" do
     before do
-      @user = FactoryGirl.create(:user)
-      @picture = FactoryGirl.build(:picture)
+      @user = FactoryBot.create(:user)
+      @picture = FactoryBot.build(:picture)
       @picture.user_id = @user.id
     end
 
-    # context "Attributes" do
-    #   it 'are readable' do
-    #     expect(@picture.name).to eq ''
-    #     expect(@picture.description).to eq ''
-    #     expect(@picture.category).to eq ''
-    #     expect(@picture.ingredient1).to eq ''
-    #     expect(@picture.quantity1).to eq ''
-    #     expect(@picture.instruction1).to eq ''
-    #   end
-    # end
-
     context "Validations" do
 
-      it "should validate name" do
-        should validate_presence_of(:name)
-        should validate_length_of(:name)
-        .is_at_most 32
+      it "should validate user_id" do
+        should validate_presence_of(:user_id)
       end
-
-      it "should validate description" do
-        should validate_presence_of(:description)
-        should validate_length_of(:description)
-        .is_at_least 3
+      it "should validate numbericality of user_id" do
+        should validate_numericality_of(:user_id)
       end
-
-      it "should validate category" do
-        should validate_presence_of(:category)
-        should validate_length_of(:category)
+      it "should validate positive number of user_id" do
+        should_not allow_value(-1).for(:user_id)
       end
-
-      it "should validate ingredient1" do
-        should validate_presence_of(:ingredient1)
-        should validate_length_of(:ingredient1)
+      it "should validate non zero number of user_id" do
+        should_not allow_value(0).for(:user_id)
       end
-
-      it "should validate quantity1" do
-        should validate_presence_of(:quantity1)
-        should validate_length_of(:quantity1)
+      it "should validate integer number of user_id" do
+        should_not allow_value(1.5).for(:user_id)
       end
-
-      it "should validate instruction1" do
-        should validate_presence_of(:instruction1)
-        should validate_length_of(:instruction1)
+      it "should validate file_data" do
+        should validate_presence_of(:file_data)
+      end
+      it "should validate tags" do
+        should validate_presence_of(:tags)
       end
 
     end
@@ -62,53 +41,54 @@ RSpec.describe Picture, type: :model do
         }.to change(Picture, :count).by(1)
       end
 
-      it "should not save when name is empty" do
-        @picture.name = ""
+      it "should not save when user_id is empty" do
+        @picture.user_id = ""
         expect {
           @picture.save
         }.not_to change(Picture, :count)
       end
 
-      it "should not save when name is nil" do
-        @picture.name = nil
+      it "should not save when user_id is nil" do
+        @picture.user_id = nil
         expect {
           @picture.save
         }.not_to change(Picture, :count)
       end
+
+      it "should not save when file_data is empty" do
+        @picture.file_data = ""
+        expect {
+          @picture.save
+        }.not_to change(Picture, :count)
+      end
+
+      it "should not save when file_data is nil" do
+        @picture.file_data = nil
+        expect {
+          @picture.save
+        }.not_to change(Picture, :count)
+      end
+
+      it "should not save when tags is empty" do
+        @picture.tags = ""
+        expect {
+          @picture.save
+        }.not_to change(Picture, :count)
+      end
+
+      it "should not save when tags is nil" do
+        @picture.tags = nil
+        expect {
+          @picture.save
+        }.not_to change(Picture, :count)
+      end
+
     end
 
     context "#update" do
-      it "should correctly change the name" do
-        @picture.update(name: "BA's Best Chicken")
-        expect(@picture.name).to eq("BA's Best Chicken")
-      end
-      it "should correctly change the description" do
-        @picture.update(description: "Hot hot hot")
-        expect(@picture.description).to eq("Hot hot hot")
-      end
-      it "should correctly change the source" do
-        @picture.update(source: "http://www.bonappetit.com/story/easiest-roast-chicken-picture")
-        expect(@picture.source).to eq("http://www.bonappetit.com/story/easiest-roast-chicken-picture")
-      end
-      it "should correctly change the category" do
-        @picture.update(category: "Chicken, Bon Appetit")
-        expect(@picture.category).to eq("Chicken, Bon Appetit")
-      end
-      it "should correctly change the prep_time" do
-        @picture.update(prep_time: "1 hour")
-        expect(@picture.prep_time).to eq("1 hour")
-      end
-      it "should correctly change the servings" do
-        @picture.update(servings: "6")
-        expect(@picture.servings).to eq("6")
-      end
-      it "should correctly change the cals_serving" do
-        @picture.update(cals_serving: "630")
-        expect(@picture.cals_serving).to eq("630")
-      end
-      it "should correctly change the notes" do
-        @picture.update(notes: "This picture eliminates one of the most common complaints about whole roast chickens - that it's hard to know when they're cooked all the way through.")
-        expect(@picture.notes).to eq("This picture eliminates one of the most common complaints about whole roast chickens - that it's hard to know when they're cooked all the way through.")
+      it "should correctly change the tags" do
+        @picture.update(tags: ["BA's Best Chicken"])
+        expect(@picture.tags).to eq(["BA's Best Chicken"])
       end
     end
 

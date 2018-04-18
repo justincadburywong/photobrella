@@ -2,7 +2,7 @@
 require 'rspec/rails'
 require 'spec_helper'
 require 'capybara/rails'
-require 'support/factory_girl'
+require 'support/factory_bot'
 
 ENV['RAILS_ENV'] ||= 'test'
 require File.expand_path('../../config/environment', __FILE__)
@@ -37,7 +37,7 @@ Capybara.default_driver = :selenium
 
 RSpec.configure do |config|
 
-  include FactoryGirl::Syntax::Methods
+  include FactoryBot::Syntax::Methods
 
   config.include Devise::Test::ControllerHelpers, type: :controller
   config.include Devise::Test::ControllerHelpers, type: :view

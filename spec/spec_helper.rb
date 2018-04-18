@@ -19,7 +19,7 @@ require File.expand_path('../../config/environment', __FILE__)
 # Prevent database truncation if the environment is production
 abort("The Rails environment is running in production mode!") if Rails.env.production?
 
-require 'support/factory_girl'
+require 'support/factory_bot'
 require 'devise'
 require 'spec_helper'
 require 'rspec/rails'
@@ -48,7 +48,7 @@ RSpec.configure do |config|
     mocks.verify_partial_doubles = true
   end
 
-  include FactoryGirl::Syntax::Methods
+  include FactoryBot::Syntax::Methods
   config.include Devise::Test::ControllerHelpers, type: :controller
   config.include Devise::Test::ControllerHelpers, type: :view
   config.include Devise::Test::IntegrationHelpers, type: :feature

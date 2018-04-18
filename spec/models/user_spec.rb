@@ -2,12 +2,18 @@ require 'rails_helper'
 
 RSpec.describe User, type: :model do
   describe "Model" do
+
+    # context "associations" do
+    #   should have_many(:pictures)
+    # end
+
     context 'Validations' do
       it { should validate_presence_of :email}
       it { should validate_presence_of :password}
     end
+
     context "#save" do
-      let(:user) { User.new(email: "tim@tim.com", password: "timtim")}
+      let(:user) { FactoryBot.create(:user) }
       it "adds an entry to the db" do
         expect {
           user.save
@@ -26,9 +32,10 @@ RSpec.describe User, type: :model do
         }.not_to change(User, :count)
       end
     end
+    
     describe "Signing up" do
       before do
-        @user = FactoryGirl.create(:user)
+        @user = FactoryBot.create(:user)
       end
       it "should save a user" do
         expect(@user).to be_valid
