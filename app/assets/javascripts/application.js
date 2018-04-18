@@ -31,50 +31,30 @@ function eventListeners(){
 }
 
 function filter(){
-  // $('#filter').on('input', function(e){
-  //   var searchTags, imageTags;
-  //   searchTags = this.value;
-  //   $('.tag-value').each(function(){
-      // console.log(searchTags);
-      // console.log($(this).text());
-
-      // if($(this).text().toUpperCase().indexOf(searchTags.toUpperCase()) != -1){
-      //      $(this).hide();
-      //    }
-
-
-       $('#filter').on('input', function () {
-           var filter_array = new Array();
-           var filter = this.value.toLowerCase();  // no need to call jQuery here
-           filter_array = filter.split(' '); // split the user input at the spaces
-           // console.log("words " + filter_array);
-           var arrayLength = filter_array.length; // Get the length of the filter array
-           // console.log("array length " + arrayLength)
-           $('.column').each(function() {
-               /* cache a reference to the current .column (you're using it twice) */
-               var div = $(this);
-               var title = div.find('.tag-value').val().toLowerCase();
-               console.log(title);
-               // title and filter are normalized in lowerCase letters for a case insensitive search
-
-               var hidden = 0; // Set a flag to see if a div was hidden
-
-               // Loop through all the words in the array and hide the div if found
-               for (var i = 0; i < arrayLength; i++) {
-                    if (title.indexOf(filter_array[i]) < 0) {
-                       div.hide();
-                       hidden = 1;
-                   }
-               }
-               // If the flag hasn't been tripped show the div
-               if (hidden == 0)  {
-                  div.show();
-               }
-           });
-        });
-  //
-  //   };
-  // });
+  $('#filter').on('input', function () {
+    var filter_array = new Array();
+    var filter = this.value.toLowerCase();  // no need to call jQuery here
+    filter_array = filter.split(' '); // split the user input at the spaces
+    var arrayLength = filter_array.length; // Get the length of the filter array
+    $('.column').each(function() {
+      /* cache a reference to the current .column (you're using it twice) */
+      var div = $(this);
+      var title = div.find('.tag-value').val().toLowerCase();
+      // title and filter are normalized in lowerCase letters for a case insensitive search
+      var hidden = 0; // Set a flag to see if a div was hidden
+      // Loop through all the words in the array and hide the div if found
+      for (var i = 0; i < arrayLength; i++) {
+        if (title.indexOf(filter_array[i]) < 0) {
+          div.hide();
+          hidden = 1;
+        }
+      }
+      // If the flag hasn't been tripped show the div
+      if (hidden == 0)  {
+        div.show();
+      }
+    });
+  });
 };
 
 // show the edit tag form
