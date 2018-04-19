@@ -1,4 +1,4 @@
-<div>
+<div id="picture-dom">
   <div id="picture_dropzone" class="card p-5 my-5" data-url="<%= pictures_path %>">
     <h4 class="text-center m-y-0">
       Drop files here or click to upload.
@@ -12,6 +12,9 @@
   <div id="pictures" class="row picture">
     <%= render @pictures %>
   </div>
+</div>
+
+<div id="slideshow-dom">
 </div>
 
 <div id="dropzone_preview_template" style="display: none;">
