@@ -28,6 +28,16 @@ function eventListeners(){
   filter();
   showTagForm();
   editTags();
+  preventEnter();
+}
+
+function preventEnter(){
+  $(window).keydown(function(e){
+    if(e.keyCode == 13) {
+      e.preventDefault();
+      return false;
+    }
+  });
 }
 
 function filter(){
@@ -85,26 +95,48 @@ function editTags(){
   })
 };
 
+function findMatches() {
+  return $('.column').filter('div:visible');
+}
+
 function slideShow(){
   $('#slideshow').on('click', function(e){
     e.preventDefault();
-    // $(".lazyload").width("100%")
-    $('#picture_dropzone').css("display", "none");
-    $('#pictures').slick({
-      slidesToShow: 80,
-      slidesToScroll: 1,
-      centerMode: true,
-      arrows: false,
-      // variableWidth: true,
-      // adaptiveHeight: true,
-      dots: false,
-      infinite: true,
-      lazyLoad: 'ondemand',
-      autoplay: true,
-      autoplaySpeed: 3000,
-      fade: true,
-      speed: 500,
-      cssEase: 'linear'
-    });
+    // loop over all pictures to build <img> tags with AWS links as source, data-lazy
+    // creat <img> tags and nest under #slideshow
+    const matchArray = findMatches(this.value);
+    console.log(matchArray);
+    var arrayLength = matchArray.length;
+    const html = matchArray.map(function(){
+      const originalUrl = $(this).find( "a" ).attr('href')
+      return `
+        <img data-lazy='${originalUrl}'/img>
+      `;
+    }).join('');
+
+    // hide the rest of the thumbnails
+    $('#picture-dom').css("display", "none");
+
+    // add the new images to the DOM
+    $('#slideshow-dom').innerHTML = html;
+
+    // start the slideshow
+    // $('#slideshow-dom').slick({
+    //   slidesToShow: arrayLength,
+    //   slidesToScroll: 1,
+    //   centerMode: true,
+    //   arrows: false,
+    //   // variableWidth: true,
+    //   adaptiveHeight: true,
+    //   dots: false,
+    //   infinite: true,
+    //   lazyLoad: 'ondemand',
+    //   autoplay: true,
+    //   autoplaySpeed: 3000,
+    //   fade: true,
+    //   speed: 500,
+    //   cssEase: 'linear'
+    // });
+
   });
 };
