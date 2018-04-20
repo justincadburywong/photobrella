@@ -28,11 +28,11 @@ function eventListeners(){
   filter();
   showTagForm();
   editTags();
-  preventEnter();
+  preventEnterOnFilter();
 }
 
-function preventEnter(){
-  $(window).keydown(function(e){
+function preventEnterOnFilter(){
+  $('#filter').keydown(function(e){
     if(e.keyCode == 13) {
       e.preventDefault();
       return false;
@@ -69,9 +69,11 @@ function filter(){
 
 // show the edit tag form
 function showTagForm(){
-  $('.fa-edit').on('click', function(e){
+  $('.edit').on('click', function(e){
     var edit = $(this).siblings('form');
+    var del = $(this).siblings('.del');
     edit.toggle();
+    del.toggle();
   })
 }
 
