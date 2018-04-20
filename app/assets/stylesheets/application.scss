@@ -99,11 +99,10 @@ body {
   }
 }
 
-/* Style the button and place it in the upper left of the container/image */
+/* Style the edit button and place it in the upper left of the container/image */
 .column i {
   position: absolute;
   top: 10%;
-  left: 10%;
   transform: translate(-50%, -50%);
   -ms-transform: translate(-50%, -50%);
   // background-color: #555;
@@ -115,9 +114,25 @@ body {
   border-radius: 5px;
 }
 
-.column i:hover {
-  background-color: #555;
+.edit {
+  left: 10%;
 }
+
+/* Style the delete button and place it in the upper right of the container/image */
+.del {
+  left: 90%;
+}
+
+.edit:hover {
+  color: green;
+}
+.del:hover {
+  color: red;
+}
+
+// .column .del i:hover {
+//   background-color: red;
+// }
 
 .column form {
   position: absolute;
