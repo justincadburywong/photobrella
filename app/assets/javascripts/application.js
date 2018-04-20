@@ -105,20 +105,19 @@ function slideShow(){
     // loop over all pictures to build <img> tags with AWS links as source, data-lazy
     // creat <img> tags and nest under #slideshow
     const matchArray = findMatches(this.value);
-    console.log(matchArray);
     var arrayLength = matchArray.length;
     const html = matchArray.map(function(){
       const originalUrl = $(this).find( "a" ).attr('href')
       return `
-        <img data-lazy='${originalUrl}'/img>
+        <img src="/images/ajax-loader-lg.gif" data-lazy="${originalUrl}"/img>
       `;
-    }).join('');
-
+    }).toArray().join('');
+    console.log(html);
     // hide the rest of the thumbnails
     $('#picture-dom').css("display", "none");
 
     // add the new images to the DOM
-    $('#slideshow-dom').innerHTML = html;
+    $('#slideshow-dom').html(html);
 
     // start the slideshow
     // $('#slideshow-dom').slick({
