@@ -27,7 +27,8 @@ function eventListeners(){
   slideShow();
   filter();
   showTagForm();
-  editTags();
+  submitTags();
+  deleteImage();
   preventEnterOnFilter();
 }
 
@@ -70,15 +71,15 @@ function filter(){
 // show the edit tag form
 function showTagForm(){
   $('.edit').on('click', function(e){
-    var edit = $(this).siblings('form');
-    var del = $(this).siblings('.del');
+    var edit = $(this).siblings('.tags');
+    var del = $(this).siblings('.trash');
     edit.toggle();
     del.toggle();
   })
 }
 
  // submit a tag to an image
-function editTags(){
+function submitTags(){
   $('.tags').on('submit', function(e){
     e.preventDefault();
     var tags, postUrl, data;
@@ -97,9 +98,22 @@ function editTags(){
   })
 };
 
+function deleteImage(){
+  $('.trash').on('submit', function(e){
+    e.preventDefault();
+    var postUrl = $(this).attr('action');
+    $.ajax({
+      url:postUrl,
+      method: 'DELETE'
+    }).done(function(data){
+      // delete image div
+    })
+  })
+};
+
 function findMatches() {
   return $('.column').filter('div:visible');
-}
+};
 
 function slideShow(){
   $('#slideshow').on('click', function(e){
@@ -111,33 +125,33 @@ function slideShow(){
     const html = matchArray.map(function(){
       const originalUrl = $(this).find( "a" ).attr('href')
       return `
-        <img src="/images/ajax-loader-lg.gif" data-lazy="${originalUrl}"/img>
+        <div>
+          <img data-lazy="${originalUrl}"/img>
+        </div>
       `;
     }).toArray().join('');
-    console.log(html);
     // hide the rest of the thumbnails
     $('#picture-dom').css("display", "none");
 
     // add the new images to the DOM
-    $('#slideshow-dom').html(html);
-
-    // start the slideshow
-    // $('#slideshow-dom').slick({
-    //   slidesToShow: arrayLength,
-    //   slidesToScroll: 1,
-    //   centerMode: true,
-    //   arrows: false,
-    //   // variableWidth: true,
-    //   adaptiveHeight: true,
-    //   dots: false,
-    //   infinite: true,
-    //   lazyLoad: 'ondemand',
-    //   autoplay: true,
-    //   autoplaySpeed: 3000,
-    //   fade: true,
-    //   speed: 500,
-    //   cssEase: 'linear'
-    // });
-
+    $('#slideshow-dom').html(html).promise().done(function(){
+      // start the slideshow
+      $('#slideshow-dom').slick({
+        slidesToShow: arrayLength,
+        slidesToScroll: 1,
+        // centerMode: true,
+        arrows: false,
+        // variableWidth: true,
+        adaptiveHeight: true,
+        dots: false,
+        infinite: true,
+        lazyLoad: 'ondemand',
+        autoplay: true,
+        autoplaySpeed: 5000,
+        fade: true,
+        speed: 1500,
+        cssEase: 'linear'
+      });
+    });
   });
 };
