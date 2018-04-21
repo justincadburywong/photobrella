@@ -99,7 +99,7 @@ body {
   }
 }
 
-/* Style the edit button and place it in the upper left of the container/image */
+/* Style the buttons and place them in the upper corners of the container/image */
 .column i {
   position: absolute;
   top: 10%;
@@ -118,7 +118,6 @@ body {
   left: 10%;
 }
 
-/* Style the delete button and place it in the upper right of the container/image */
 .del {
   left: 90%;
 }
@@ -126,17 +125,22 @@ body {
 .edit:hover {
   color: green;
 }
+
 .del:hover {
   color: red;
 }
 
-// .column .del i:hover {
-//   background-color: red;
-// }
-
-.column form {
+.tags {
   position: absolute;
   bottom: 10%;
   width: 100%;
+}
 
+#slideshow-dom {
+  width: auto;
+  margin: 0 auto;
+  img {
+    width: 100%;
+    height: auto;
+  }
 }
