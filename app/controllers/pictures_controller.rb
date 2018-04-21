@@ -1,5 +1,6 @@
 class PicturesController < ApplicationController
   before_action :authenticate_user!
+  before_action :find_picture, only: [:update, :destroy]
 
   def index
     @pictures = User.find(current_user.id).pictures.sorted
@@ -27,14 +28,12 @@ class PicturesController < ApplicationController
   end
 
   def update
-    @picture = Picture.find(params[:id])
     @tags = params[:tags].split(" ")
-    p @tags
     @tags.each{|t| @picture.tags << t unless @picture.tags.include?(t)}
 
     # if @picture.update_attributes(picture_params)
     if @picture.save
-
+      flash[:notice] = "#{@picture.id} updated!"
       # Reuse existing partial
       picture_partial = render_to_string(
         'pictures/_picture',
@@ -49,9 +48,19 @@ class PicturesController < ApplicationController
     end
   end
 
+  def destroy
+    @picture.destroy
+    flash[:notice] = "#{@picture.id} deleted!"
+    redirect_to root_path
+  end
+
   private
 
    def picture_params
      params.require(:picture).permit(:tags, :id)
+   end
+
+   def find_picture
+     @picture = Picture.find(params[:id])
    end
 end
