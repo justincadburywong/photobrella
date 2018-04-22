@@ -73,7 +73,8 @@ function showTagForm(){
   $('.edit').on('click', function(e){
     var edit = $(this).siblings('.tags');
     var del = $(this).siblings('.trash');
-    edit.toggle();
+    edit.toggle()
+    $('.tag-value').focus();
     del.toggle();
   })
 }
