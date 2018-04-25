@@ -10,7 +10,8 @@
 // Read Sprockets README (https://github.com/rails/sprockets#sprockets-directives) for details
 // about supported directives.
 //
-//= require jquery3
+//= require jquery
+//= require jquery-migrate-min
 //= require dropzone
 //= require popper
 //= require bootstrap
@@ -72,7 +73,7 @@ function filter(){
 function showTagForm(){
   $('.edit').on('click', function(e){
     var edit = $(this).siblings('.tags');
-    var del = $(this).siblings('.trash');
+    var del = $(this).siblings('.del');
     edit.toggle()
     $('.tag-value').focus();
     del.toggle();
@@ -83,6 +84,7 @@ function showTagForm(){
 function submitTags(){
   $('.tags').on('submit', function(e){
     e.preventDefault();
+    $(this).siblings('.del').toggle();
     var tags, postUrl, data;
     tags = $(this);
     postUrl = $(this).attr('action');
@@ -100,14 +102,16 @@ function submitTags(){
 };
 
 function deleteImage(){
-  $('.trash').on('submit', function(e){
+  $('.del').on('click', function(e){
     e.preventDefault();
-    var postUrl = $(this).attr('action');
+    var postUrl = "/pictures/" + $(this).parent().attr('id').match(/\d+/)
+    console.log(postUrl);
     $.ajax({
-      url:postUrl,
+      url: postUrl,
       method: 'DELETE'
     }).done(function(data){
       // delete image div
+      e.target.remove();
     })
   })
 };
@@ -135,24 +139,26 @@ function slideShow(){
     $('#picture-dom').css("display", "none");
 
     // add the new images to the DOM
-    $('#slideshow-dom').html(html).promise().done(function(){
-      // start the slideshow
-      $('#slideshow-dom').slick({
-        slidesToShow: arrayLength,
-        slidesToScroll: 1,
-        // centerMode: true,
-        arrows: false,
-        // variableWidth: true,
-        adaptiveHeight: true,
-        dots: false,
-        infinite: true,
-        lazyLoad: 'ondemand',
-        autoplay: true,
-        autoplaySpeed: 5000,
-        fade: true,
-        speed: 1500,
-        cssEase: 'linear'
-      });
-    });
+    $('#slideshow-dom').html(html).promise().done(slick());
   });
 };
+
+function slick(){
+  // start the slideshow
+  $('#slideshow-dom').slick({
+    slidesToShow: arrayLength,
+    slidesToScroll: 1,
+    // centerMode: true,
+    arrows: false,
+    // variableWidth: true,
+    adaptiveHeight: true,
+    dots: false,
+    infinite: true,
+    lazyLoad: 'progressive',
+    autoplay: true,
+    autoplaySpeed: 5000,
+    fade: true,
+    speed: 1500,
+    cssEase: 'linear'
+  });
+}
