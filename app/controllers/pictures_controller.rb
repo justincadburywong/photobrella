@@ -36,24 +36,26 @@ class PicturesController < ApplicationController
     if @picture.save
       flash[:notice] = "Picture #{@picture.id} updated!"
       # Reuse existing partial
-      picture_partial = render_to_string(
-        'pictures/_picture',
-        layout: false,
-        formats: [:html],
-        locals: { picture: @picture }
-      )
-
-      render json: { picture: picture_partial }, status: 200
+      # picture_partial = render_to_string(
+      #   'pictures/_picture',
+      #   layout: false,
+      #   formats: [:html],
+      #   locals: { picture: @picture }
+      # )
+      #
+      # render json: { picture: picture_partial }, status: 200
     else
-      render json: @picture.errors, status: 400
+      flash[:notice] = "#{@picture.errors}"
+      # render json: @picture.errors, status: 400
     end
   end
 
   def destroy
-    p @picture
     @picture.destroy
-    flash[:notice] = "Picture #{@picture.id} deleted!"
-    redirect_to root_path
+    respond_to do |format|
+      format.json { head :no_content, notice: "Picture #{@picture.id} was successfully destroyed."}
+      format.html { redirect_to root_path, notice: "Picture #{@picture.id} was successfully destroyed." }
+    end
   end
 
   private
