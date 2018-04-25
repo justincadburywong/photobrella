@@ -4,11 +4,6 @@
   <i class="fa fa-pencil-alt edit"></i>
   <i class="fa fa-trash-alt del" style="display:none;"></i>
 
-  <!-- <form class="trash" action="/pictures/<%=picture.id%>" method="post">
-    <input type="hidden" name="_method" value="delete">
-    <button style="display:none;" type="submit"></button>
-  </form> -->
-
   <form class="tags" action="/pictures/<%=picture.id%>" method="post" style="display:none;">
     <input class="form-control tag-value" name="tags" value="<%= picture.tags.join(" ") %>">
     <input class="form-control" type="hidden" name="_method" value="put">
