@@ -99,11 +99,10 @@ body {
   }
 }
 
-/* Style the button and place it in the upper left of the container/image */
+/* Style the buttons and place them in the upper corners of the container/image */
 .column i {
   position: absolute;
   top: 10%;
-  left: 10%;
   transform: translate(-50%, -50%);
   -ms-transform: translate(-50%, -50%);
   // background-color: #555;
@@ -115,13 +114,33 @@ body {
   border-radius: 5px;
 }
 
-.column i:hover {
-  background-color: #555;
+.edit {
+  left: 10%;
 }
 
-.column form {
+.del {
+  left: 90%;
+}
+
+.edit:hover {
+  color: green;
+}
+
+.del:hover {
+  color: red;
+}
+
+.tags {
   position: absolute;
   bottom: 10%;
   width: 100%;
+}
 
+#slideshow-dom {
+  width: auto;
+  margin: 0 auto;
+  img {
+    width: 100%;
+    height: auto;
+  }
 }

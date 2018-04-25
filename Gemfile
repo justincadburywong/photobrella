@@ -21,7 +21,7 @@ gem 'uglifier', '>= 1.3.0'
 # See https://github.com/rails/execjs#readme for more supported runtimes
 # gem 'therubyracer', platforms: :ruby
 
-gem 'devise'
+gem 'devise', '~> 4.4.3'
 # Use CoffeeScript for .coffee assets and views
 gem 'coffee-rails', '~> 4.2'
 # Turbolinks makes navigating your web application faster. Read more: https://github.com/turbolinks/turbolinks
@@ -69,26 +69,27 @@ end
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 
 # ENV variables/secrets
-gem 'figaro'
+gem 'figaro', '~> 1.1.1'
 
 # Background jobs
-gem 'sidekiq'
+gem 'sidekiq', "~> 5.0.4"
 
 # Bootstrap
 gem 'bootstrap', '~> 4.0.0.beta'
-gem 'jquery-rails'
+gem 'jquery-rails', '~> 4.3.1'
+gem 'jquery-migrate-rails', '~> 1.2.1'
 gem 'font-awesome-sass', '~> 5.0.9'
 
 # Upload images to Amazon S3
-gem 'aws-sdk'
+gem 'aws-sdk', '~> 2.10.29'
 # Required for validations
-gem 'fastimage'
+gem 'fastimage', '~> 2.1.0'
 # Required for image versioning
-gem 'image_processing'
+gem 'image_processing', '~> 0.4.4'
 # Required for image versioning
-gem 'mini_magick'
+gem 'mini_magick', '~> 4.8.0'
 # Shrine :)
-gem 'shrine'
+gem 'shrine', '~> 2.6.1'
 
 # Assets
 source 'https://rails-assets.org' do

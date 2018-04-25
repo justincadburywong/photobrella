@@ -10,7 +10,8 @@
 // Read Sprockets README (https://github.com/rails/sprockets#sprockets-directives) for details
 // about supported directives.
 //
-//= require jquery3
+//= require jquery
+//= require jquery-migrate-min
 //= require dropzone
 //= require popper
 //= require bootstrap
@@ -27,7 +28,18 @@ function eventListeners(){
   slideShow();
   filter();
   showTagForm();
-  editTags();
+  submitTags();
+  deleteImage();
+  preventEnterOnFilter();
+}
+
+function preventEnterOnFilter(){
+  $('#filter').keydown(function(e){
+    if(e.keyCode == 13) {
+      e.preventDefault();
+      return false;
+    }
+  });
 }
 
 function filter(){
@@ -59,16 +71,20 @@ function filter(){
 
 // show the edit tag form
 function showTagForm(){
-  $('.fa-edit').on('click', function(e){
-    var edit = $(this).siblings('form');
-    edit.toggle();
+  $('.edit').on('click', function(e){
+    var edit = $(this).siblings('.tags');
+    var del = $(this).siblings('.del');
+    edit.toggle()
+    $('.tag-value').focus();
+    del.toggle();
   })
 }
 
  // submit a tag to an image
-function editTags(){
+function submitTags(){
   $('.tags').on('submit', function(e){
     e.preventDefault();
+    $(this).siblings('.del').toggle();
     var tags, postUrl, data;
     tags = $(this);
     postUrl = $(this).attr('action');
@@ -85,26 +101,64 @@ function editTags(){
   })
 };
 
+function deleteImage(){
+  $('.del').on('click', function(e){
+    e.preventDefault();
+    var postUrl = "/pictures/" + $(this).parent().attr('id').match(/\d+/)
+    console.log(postUrl);
+    $.ajax({
+      url: postUrl,
+      method: 'DELETE'
+    }).done(function(data){
+      // delete image div
+      e.target.remove();
+    })
+  })
+};
+
+function findMatches() {
+  return $('.column').filter('div:visible');
+};
+
 function slideShow(){
   $('#slideshow').on('click', function(e){
     e.preventDefault();
-    // $(".lazyload").width("100%")
-    $('#picture_dropzone').css("display", "none");
-    $('#pictures').slick({
-      slidesToShow: 80,
-      slidesToScroll: 1,
-      centerMode: true,
-      arrows: false,
-      // variableWidth: true,
-      // adaptiveHeight: true,
-      dots: false,
-      infinite: true,
-      lazyLoad: 'ondemand',
-      autoplay: true,
-      autoplaySpeed: 3000,
-      fade: true,
-      speed: 500,
-      cssEase: 'linear'
-    });
+    // loop over all pictures to build <img> tags with AWS links as source, data-lazy
+    // creat <img> tags and nest under #slideshow
+    const matchArray = findMatches(this.value);
+    var arrayLength = matchArray.length;
+    const html = matchArray.map(function(){
+      const originalUrl = $(this).find( "a" ).attr('href')
+      return `
+        <div>
+          <img data-lazy="${originalUrl}"/img>
+        </div>
+      `;
+    }).toArray().join('');
+    // hide the rest of the thumbnails
+    $('#picture-dom').css("display", "none");
+
+    // add the new images to the DOM
+    $('#slideshow-dom').html(html).promise().done(slick());
   });
 };
+
+function slick(){
+  // start the slideshow
+  $('#slideshow-dom').slick({
+    slidesToShow: arrayLength,
+    slidesToScroll: 1,
+    // centerMode: true,
+    arrows: false,
+    // variableWidth: true,
+    adaptiveHeight: true,
+    dots: false,
+    infinite: true,
+    lazyLoad: 'progressive',
+    autoplay: true,
+    autoplaySpeed: 5000,
+    fade: true,
+    speed: 1500,
+    cssEase: 'linear'
+  });
+}
