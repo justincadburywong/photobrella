@@ -29,11 +29,12 @@ class PicturesController < ApplicationController
 
   def update
     @tags = params[:tags].split(" ")
-    @tags.each{|t| @picture.tags << t unless @picture.tags.include?(t)}
+    @picture.tags = []
+    @tags.each{|t| @picture.tags << t}
 
     # if @picture.update_attributes(picture_params)
     if @picture.save
-      flash[:notice] = "#{@picture.id} updated!"
+      flash[:notice] = "Picture #{@picture.id} updated!"
       # Reuse existing partial
       picture_partial = render_to_string(
         'pictures/_picture',
@@ -49,8 +50,9 @@ class PicturesController < ApplicationController
   end
 
   def destroy
+    p @picture
     @picture.destroy
-    flash[:notice] = "#{@picture.id} deleted!"
+    flash[:notice] = "Picture #{@picture.id} deleted!"
     redirect_to root_path
   end
 
