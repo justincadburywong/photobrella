@@ -138,6 +138,7 @@ body {
   position: absolute;
   bottom: 10%;
   width: 100%;
+  padding-right: 8px;
 }
 
 #slideshow-dom {
@@ -145,6 +146,7 @@ body {
   margin: 24px auto;
   img {
     width: 1200px;
-    height: auto;
+    display: block;
+
   }
 }
