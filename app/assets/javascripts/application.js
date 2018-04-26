@@ -29,6 +29,7 @@ function eventListeners(){
   filter();
   showTagForm();
   submitTags();
+  editAllTags();
   deleteImage();
   preventEnterOnFilter();
 }
@@ -68,6 +69,22 @@ function filter(){
     });
   });
 };
+
+// toggle all edit tag forms
+function editAllTags(){
+  var counter = 0
+  $('#all-tags-button').on('click', function(e){
+    if(counter == 0){
+      $('.tags').show();
+      $('.del').show()
+      counter = 1
+    }else{
+      $('.tags').hide();
+      $('.del').hide();
+      counter = 0
+    };
+  })
+}
 
 // show the edit tag form
 function showTagForm(){
@@ -142,7 +159,8 @@ function slideShow(){
         slidesToShow: arrayLength,
         slidesToScroll: 1,
         arrows: false,
-        variableWidth: true,
+        // variableWidth: true,
+        adaptiveHeight: true,
         dots: false,
         infinite: true,
         lazyLoad: 'progressive',
