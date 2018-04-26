@@ -130,6 +130,10 @@ body {
   color: red;
 }
 
+#all-tags-button:hover {
+  color: green;
+}
+
 .tags {
   position: absolute;
   bottom: 10%;
@@ -138,9 +142,9 @@ body {
 
 #slideshow-dom {
   width: auto;
-  margin: 0 auto;
+  margin: 24px auto;
   img {
-    width: 100%;
+    width: 1200px;
     height: auto;
   }
 }
