@@ -135,14 +135,13 @@ function findMatches() {
 };
 
 function slide(arrayLength){
-  console.log(arrayLength);
   // start the slideshow
   return $('#slideshow-dom').slick({
     slidesToShow: arrayLength,
     slidesToScroll: 1,
     arrows: false,
     // variableWidth: true,
-    adaptiveHeight: true,
+    // adaptiveHeight: true,
     dots: false,
     infinite: true,
     lazyLoad: 'progressive',
