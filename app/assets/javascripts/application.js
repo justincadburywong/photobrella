@@ -29,6 +29,7 @@ function eventListeners(){
   filter();
   showTagForm();
   submitTags();
+  editAllTags();
   deleteImage();
   preventEnterOnFilter();
 }
@@ -69,14 +70,28 @@ function filter(){
   });
 };
 
+// toggle all edit tag forms
+function editAllTags(){
+  var counter = 0
+  $('#all-tags-button').on('click', function(e){
+    if(counter == 0){
+      $('.tags').show();
+      $('.del').show()
+      counter = 1
+    }else{
+      $('.tags').hide();
+      $('.del').hide();
+      counter = 0
+    };
+  })
+}
+
 // show the edit tag form
 function showTagForm(){
   $('.edit').on('click', function(e){
-    var edit = $(this).siblings('.tags');
-    var del = $(this).siblings('.del');
-    edit.toggle()
+    $(this).siblings('.tags').toggle();
+    $(this).siblings('.del').toggle();
     $('.tag-value').focus();
-    del.toggle();
   })
 }
 
@@ -105,19 +120,37 @@ function deleteImage(){
   $('.del').on('click', function(e){
     e.preventDefault();
     var postUrl = "/pictures/" + $(this).parent().attr('id').match(/\d+/)
-    console.log(postUrl);
     $.ajax({
       url: postUrl,
       method: 'DELETE'
     }).done(function(data){
       // delete image div
-      e.target.remove();
+      $(e.target).parent().remove();
     })
   })
 };
 
 function findMatches() {
   return $('.column').filter('div:visible');
+};
+
+function slide(arrayLength){
+  // start the slideshow
+  return $('#slideshow-dom').slick({
+    slidesToShow: arrayLength,
+    slidesToScroll: 1,
+    arrows: false,
+    // variableWidth: true,
+    // adaptiveHeight: true,
+    dots: false,
+    infinite: true,
+    lazyLoad: 'progressive',
+    autoplay: true,
+    autoplaySpeed: 5000,
+    fade: true,
+    speed: 1500,
+    cssEase: 'linear'
+  });
 };
 
 function slideShow(){
@@ -139,26 +172,6 @@ function slideShow(){
     $('#picture-dom').css("display", "none");
 
     // add the new images to the DOM
-    $('#slideshow-dom').html(html).promise().done(slick());
+    $('#slideshow-dom').html(html).promise().done(slide(arrayLength));
   });
 };
-
-function slick(){
-  // start the slideshow
-  $('#slideshow-dom').slick({
-    slidesToShow: arrayLength,
-    slidesToScroll: 1,
-    // centerMode: true,
-    arrows: false,
-    // variableWidth: true,
-    adaptiveHeight: true,
-    dots: false,
-    infinite: true,
-    lazyLoad: 'progressive',
-    autoplay: true,
-    autoplaySpeed: 5000,
-    fade: true,
-    speed: 1500,
-    cssEase: 'linear'
-  });
-}
