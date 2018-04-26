@@ -31,22 +31,9 @@ class PicturesController < ApplicationController
     @tags = params[:tags].split(" ")
     @picture.tags = []
     @tags.each{|t| @picture.tags << t}
-
-    # if @picture.update_attributes(picture_params)
-    if @picture.save
-      flash[:notice] = "Picture #{@picture.id} updated!"
-      # Reuse existing partial
-      # picture_partial = render_to_string(
-      #   'pictures/_picture',
-      #   layout: false,
-      #   formats: [:html],
-      #   locals: { picture: @picture }
-      # )
-      #
-      # render json: { picture: picture_partial }, status: 200
-    else
-      flash[:notice] = "#{@picture.errors}"
-      # render json: @picture.errors, status: 400
+    respond_to do |format|
+      format.json { head :no_content, notice: "Picture #{@picture.id} updated."}
+      format.html { redirect_to root_path, notice: "Picture #{@picture.id} updated." }
     end
   end
 
