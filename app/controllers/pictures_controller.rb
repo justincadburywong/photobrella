@@ -51,6 +51,8 @@ class PicturesController < ApplicationController
   end
 
   def destroy
+    @picture.file[:original].delete
+    @picture.file[:thumbnail].delete
     @picture.destroy
     respond_to do |format|
       format.json { head :no_content, notice: "Picture #{@picture.id} was successfully destroyed."}
@@ -61,7 +63,7 @@ class PicturesController < ApplicationController
   private
 
    def picture_params
-     params.require(:picture).permit(:tags, :id)
+     params.require(:picture).permit(:file, :tags, :id)
    end
 
    def find_picture
