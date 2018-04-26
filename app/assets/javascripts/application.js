@@ -134,6 +134,26 @@ function findMatches() {
   return $('.column').filter('div:visible');
 };
 
+function slide(arrayLength){
+  console.log(arrayLength);
+  // start the slideshow
+  return $('#slideshow-dom').slick({
+    slidesToShow: arrayLength,
+    slidesToScroll: 1,
+    arrows: false,
+    // variableWidth: true,
+    adaptiveHeight: true,
+    dots: false,
+    infinite: true,
+    lazyLoad: 'progressive',
+    autoplay: true,
+    autoplaySpeed: 5000,
+    fade: true,
+    speed: 1500,
+    cssEase: 'linear'
+  });
+};
+
 function slideShow(){
   $('#slideshow').on('click', function(e){
     e.preventDefault();
@@ -153,23 +173,6 @@ function slideShow(){
     $('#picture-dom').css("display", "none");
 
     // add the new images to the DOM
-    $('#slideshow-dom').html(html).promise().done(function(){
-      // start the slideshow
-      $('#slideshow-dom').slick({
-        slidesToShow: arrayLength,
-        slidesToScroll: 1,
-        arrows: false,
-        // variableWidth: true,
-        adaptiveHeight: true,
-        dots: false,
-        infinite: true,
-        lazyLoad: 'progressive',
-        autoplay: true,
-        autoplaySpeed: 5000,
-        fade: true,
-        speed: 1500,
-        cssEase: 'linear'
-      });
-    });
+    $('#slideshow-dom').html(html).promise().done(slide(arrayLength));
   });
 };
