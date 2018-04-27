@@ -1,4 +1,5 @@
 class PicturesController < ApplicationController
+  skip_before_filter :verify_authenticity_token
   before_action :authenticate_user!
   before_action :find_picture, only: [:update, :destroy]
 
