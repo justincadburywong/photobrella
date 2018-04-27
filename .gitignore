@@ -17,7 +17,7 @@
 /yarn-error.log
 
 .byebug_history
-Gemfile.lock
+
 
 # Ignore application configuration
 /config/application.yml
