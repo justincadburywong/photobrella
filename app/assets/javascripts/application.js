@@ -21,7 +21,7 @@
 
 $(document).on('turbolinks:load', function(){
   eventListeners();
-})
+});
 
 function eventListeners(){
   slideShow();
