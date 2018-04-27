@@ -19,10 +19,9 @@
 //= require turbolinks
 //= require_tree ./features
 
-
-$(document).ready(function(){
+$(document).on('turbolinks:load', function(){
   eventListeners();
-})
+});
 
 function eventListeners(){
   slideShow();
