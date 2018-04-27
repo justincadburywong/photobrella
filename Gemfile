@@ -8,7 +8,7 @@ git_source(:github) do |repo_name|
 end
 
 group :production do
-  gem 'cloudflare-rails', '~> 0.2.0'
+  gem 'cloudflare-rails'
 end
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
