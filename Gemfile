@@ -90,7 +90,7 @@ gem 'mini_magick', '~> 4.8.0'
 # Shrine :)
 gem 'shrine', '~> 2.6.1'
 
-gem 'cloudflare-rails'
+gem 'actionpack-cloudflare'
 
 # Assets
 source 'https://rails-assets.org' do
