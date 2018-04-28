@@ -7,7 +7,6 @@ git_source(:github) do |repo_name|
   "https://github.com/#{repo_name}.git"
 end
 
-
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '~> 5.1.3'
 # Use postgresql as the database for Active Record
@@ -90,6 +89,9 @@ gem 'image_processing', '~> 0.4.4'
 gem 'mini_magick', '~> 4.8.0'
 # Shrine :)
 gem 'shrine', '~> 2.6.1'
+
+gem 'cloudflare-rails'
+# gem 'actionpack-cloudflare'
 
 # Assets
 source 'https://rails-assets.org' do
