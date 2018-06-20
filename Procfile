@@ -1,2 +1,2 @@
 web: bundle exec rails s
-worker: bundle exec sidekiq -e production
+worker: bundle exec sidekiq -c 3
