@@ -10,7 +10,9 @@
   </div>
 
   <div id="pictures" class="row picture">
-    <%= render @pictures %>
+    <% if @pictures %>
+      <%= render @pictures %>
+    <% end %>
   </div>
 </div>
 
