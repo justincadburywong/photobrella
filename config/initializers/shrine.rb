@@ -12,7 +12,7 @@ s3_options = {
 # URL options for CloudFront CDN
 url_options = {
   public: true,
-  host: URI.parse(URI.encode(ENV['aws_host']))
+  host: ENV['aws_host']
 }
 
 # The S3 storage plugin handles uploads to Amazon S3 service, using the aws-sdk gem.
