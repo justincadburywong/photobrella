@@ -74,7 +74,7 @@ gem 'figaro', '~> 1.1.1'
 gem 'sidekiq', "~> 5.0.4"
 
 # Bootstrap
-gem 'bootstrap', '~> 4.0.0.beta'
+gem 'bootstrap', '~> 4.1.2'
 gem 'jquery-rails', '~> 4.3.1'
 gem 'jquery-migrate-rails', '~> 1.2.1'
 gem 'font-awesome-sass', '~> 5.0.9'
