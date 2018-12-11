@@ -1,5 +1,5 @@
 <%= content_tag :div, id: dom_id(picture), class: 'column col-3'  do %>
-  <%= link_to image_tag(image_path("ajax-loader-lg.gif"), data: { "src" => image_path(picture.file_url(:thumbnail)), "lazy" => image_path(picture.file_url(:thumbnail)) }, class: 'rounded img-fluid mb-3 lazyload'), picture.file_url(:original), target: :_blank %>
+  <%= link_to image_tag(image_path("ajax-loader-lg.gif"), data: { "src" => image_path(picture.file_url(:thumbnail)), "lazy" => image_path(picture.file_url(:thumbnail)) }, class: 'rounded img-fluid mb-3 lazyload'), picture.file_url(:original), target: :_blank unless picture.file_data.blank? %>
 
   <i class="fa fa-pencil-alt edit"></i>
   <i class="fa fa-trash-alt del" style="display:none;"></i>
