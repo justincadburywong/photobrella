@@ -20,7 +20,7 @@ gem 'uglifier', '>= 1.3.0'
 # See https://github.com/rails/execjs#readme for more supported runtimes
 # gem 'therubyracer', platforms: :ruby
 gem 'rack-cors'
-gem 'devise', '~> 4.4.3'
+gem "devise", ">= 4.6.0"
 # Use CoffeeScript for .coffee assets and views
 gem 'coffee-rails', '~> 4.2'
 # Turbolinks makes navigating your web application faster. Read more: https://github.com/turbolinks/turbolinks
@@ -74,7 +74,7 @@ gem 'figaro', '~> 1.1.1'
 gem 'sidekiq', "~> 5.0.4"
 
 # Bootstrap
-gem 'bootstrap', '~> 4.1.2'
+gem "bootstrap", ">= 4.3.1"
 gem 'jquery-rails', '~> 4.3.1'
 gem 'jquery-migrate-rails', '~> 1.2.1'
 gem 'font-awesome-sass', '~> 5.0.9'
