@@ -86,7 +86,7 @@ gem 'fastimage', '~> 2.1.0'
 # Required for image versioning
 gem 'image_processing', '~> 0.4.4'
 # Required for image versioning
-gem 'mini_magick', '~> 4.8.0'
+gem 'mini_magick', '~> 4.9.4'
 # Shrine :)
 gem 'shrine', '~> 2.6.1'
 
