@@ -1,9 +1,9 @@
 FactoryBot.define do
   factory :user do
     email { Faker::Internet.email }
-    password "helloworld"
-    password_confirmation "helloworld"
-    remember_created_at Time.now
+    password { "helloworld" }
+    password_confirmation { "helloworld" }
+    remember_created_at { Time.now }
   end
 
   factory :picture do

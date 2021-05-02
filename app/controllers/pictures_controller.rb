@@ -5,6 +5,7 @@ class PicturesController < ApplicationController
   def index
     @pictures = User.find(current_user.id).pictures.sorted
     # additional 'into groups of 4 logic here'
+    p @pictures 
   end
 
   def create
