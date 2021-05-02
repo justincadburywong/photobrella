@@ -88,7 +88,7 @@ gem 'image_processing', '~> 0.4.4'
 # Required for image versioning
 gem 'mini_magick', '~> 4.8.0'
 # Shrine :)
-gem 'shrine', '~> 2.6.1'
+gem 'shrine', '~> 3.3.0'
 
 gem 'cloudflare-rails'
 # gem 'actionpack-cloudflare'
