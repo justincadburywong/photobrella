@@ -71,7 +71,7 @@ gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 gem 'figaro', '~> 1.1.1'
 
 # Background jobs
-gem 'sidekiq', "~> 5.0.4"
+gem 'sidekiq', "~> 5.2.0"
 
 # Bootstrap
 gem "bootstrap", ">= 4.3.1"
