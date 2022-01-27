@@ -94,7 +94,7 @@ GEM
       coffee-script-source
       execjs
     coffee-script-source (1.12.2)
-    concurrent-ruby (1.1.8)
+    concurrent-ruby (1.1.9)
     connection_pool (2.2.5)
     crass (1.0.6)
     database_cleaner (2.0.1)
@@ -295,11 +295,11 @@ GEM
       activesupport (>= 4.2.0)
     shrine (2.6.1)
       down (>= 2.3.6)
-    sidekiq (5.0.5)
-      concurrent-ruby (~> 1.0)
-      connection_pool (~> 2.2, >= 2.2.0)
+    sidekiq (5.2.9)
+      connection_pool (~> 2.2, >= 2.2.2)
+      rack (~> 2.0)
       rack-protection (>= 1.5.0)
-      redis (>= 3.3.4, < 5)
+      redis (>= 3.3.5, < 4.2)
     spring (2.1.1)
     spring-watcher-listen (2.0.1)
       listen (>= 2.7, < 4.0)
@@ -375,7 +375,7 @@ DEPENDENCIES
   selenium-webdriver
   shoulda
   shrine (~> 2.6.1)
-  sidekiq (~> 5.0.4)
+  sidekiq (~> 5.2.9)
   spring
   spring-watcher-listen (~> 2.0.0)
   turbolinks (~> 5)
